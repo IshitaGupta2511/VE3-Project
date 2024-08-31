@@ -1,0 +1,13 @@
+{
+  "name": "simple-web-app",
+  "version": "1.0.0",
+  "description": "A simple web app",
+  "main": "index.js",
+  "scripts": {
+    "build": "node src/index.js"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}
+
