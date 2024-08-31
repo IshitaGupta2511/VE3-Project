@@ -58,7 +58,7 @@ jobs:
         with:
           task-definition: ecs-task-def.json
           container-name: my-container
-          image: ${{ steps.build-image.outputs.image }}
+          image: 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action
 
      #Deploy to ECS
       - name: Deploy to ECS
