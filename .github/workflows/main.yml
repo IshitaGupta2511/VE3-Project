@@ -68,6 +68,11 @@ jobs:
           service: Github-service
           cluster: Github-Cluster-1
           wait-for-service-stability: true
+
+     # Integrate Testing
+      - name: Integration Tests
+        run: |
+          curl -f http://my-service-url/health || exit 1    
        
 
           
