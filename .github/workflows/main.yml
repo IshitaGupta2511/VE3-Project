@@ -29,7 +29,7 @@ jobs:
       # Build Docker image with multi-stage build
       - name: Build Docker image
         run: |
-          docker build --file Dockerfile --tag my-app-image:latest . 
+          docker build --file Dockerfile --tag $ECR_REGISTRY/$ECR_REPOS:latest . 
 
       # Configure AWS credentials
       - name: Configure AWS credentials
@@ -47,17 +47,13 @@ jobs:
       # 3. Push image to ECR
       - name: Push Docker image to ECR
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
           ECR_REPOSITORY: ${{ secrets.ECR_URL }}  
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+          ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
           ECR_REPOS: ${{secrets.ECR_REPOS }}
         run: |
-          # Log in to Amazon ECR
-           # Login to Amazon ECR
-            aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
-      
+             docker push $ECR_REGISTRY/$ECR_REPOS:latest
+        
+       
 
           # Tag the Docker image
           docker tag my-app-image:latest  551364857603.dkr.ecr.us-west-1.amazonaws.com/ishitadocker/github-action:latest
