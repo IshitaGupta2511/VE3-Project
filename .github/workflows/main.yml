@@ -54,11 +54,11 @@ jobs:
      # Render ECS
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
-        uses:  aws-actions/amazon-ecs-render-task-definition@c804dfbdd57f713b6c079302a4c01db7017a36fc
+        uses:  aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: ecs-task-def.json
           container-name: my-container
-          image: 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action
+          image: 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest
 
      #Deploy to ECS
       - name: Deploy to ECS
