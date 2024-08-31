@@ -72,7 +72,17 @@ jobs:
      # Integrate Testing
       - name: Integration Tests
         run: |
-          curl -f http://my-service-url/health || exit 1    
+          curl -f http://my-service-url/health || exit 1 
+
+
+      # Rollback in case of failure
+      - name: Rollback
+        if: failure()  # This step will only run if the previous steps fail
+        run: |
+          echo "Integration tests failed. Rolling back..."
+          aws ecs update-service  --cluster my-cluster  --service my-service --force-new-deployment  --region us-west-1    
+
+          
        
 
           
