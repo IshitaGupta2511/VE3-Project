@@ -29,7 +29,7 @@ jobs:
       # Build Docker image with multi-stage build
       - name: Build Docker image
         run: |
-          docker build --file Dockerfile --tag $ECR_REGISTRY/$ECR_REPOS:latest . 
+          docker build --file Dockerfile --tag github-action . 
 
       # Configure AWS credentials
       - name: Configure AWS credentials
@@ -51,12 +51,10 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
           ECR_REPOS: ${{secrets.ECR_REPOS }}
         run: |
-             docker push $ECR_REGISTRY/$ECR_REPOS:latest
+             aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 551364857603.dkr.ecr.us-west-1.amazonaws.com
+             docker tag github-action:latest 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest
+             docker push 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest
         
        
 
-          # Tag the Docker image
-          docker tag my-app-image:latest  551364857603.dkr.ecr.us-west-1.amazonaws.com/ishitadocker/github-action:latest
-
-          # Push the Docker image to ECR
-          docker push 551364857603.dkr.ecr.us-west-1.amazonaws.com/ishitadocker/github-action:latest   
+          
