@@ -31,6 +31,9 @@ jobs:
         run: |
           docker build --file Dockerfile --tag my-app-image:latest .
 
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1    
+
       # 3. Push image to ECR
       - name: Push Docker image to ECR
         env:
