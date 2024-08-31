@@ -46,15 +46,19 @@ jobs:
 
       # 3. Push image to ECR
       - name: Push Docker image to ECR
-        env:
-          ECR_REPOSITORY: ${{ secrets.ECR_URL }}  
-          ECR_REGISTRY: ${{ steps.login-pf-aws-ecr.outputs.registry }}
-          ECR_REPOS: ${{secrets.ECR_REPOS }}
         run: |
              aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 551364857603.dkr.ecr.us-west-1.amazonaws.com
              docker tag github-action:latest 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest
              docker push 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest
-        
+
+     #Deploy to ECS
+      - name: Deploy to ECS
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ecs-task-def.json
+          service: Github-service
+          cluster: Github-Cluster-1
+          wait-for-service-stability: true
        
 
           
