@@ -53,7 +53,9 @@ jobs:
           ECR_REPOSITORY: ${{ secrets.ECR_REPO_URL }}  # Example: my-app-repo
         run: |
           # Log in to Amazon ECR
-          aws ecr get-login-password --region us-west-1 | docker login --username AWS --password-stdin 551364857603.dkr.ecr.us-west-1.amazonaws.com
+           # Login to Amazon ECR
+            aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 551364857603.dkr.ecr.us-west-1.amazonaws.com
+      
 
           # Tag the Docker image
           docker tag ishitadocker/github-action:latest 551364857603.dkr.ecr.us-west-1.amazonaws.com/ishitadocker/github-action:latest
