@@ -51,6 +51,15 @@ jobs:
              docker tag github-action:latest 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest
              docker push 551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest
 
+     # Render ECS
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ecs-task-def.json
+          container-name: my-container
+          image: ${{ steps.build-image.outputs.image }}
+
      #Deploy to ECS
       - name: Deploy to ECS
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
