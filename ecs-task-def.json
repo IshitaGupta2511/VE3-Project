@@ -1,10 +1,11 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-west-1:551364857603:task-definition/Github-Task-def:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-west-1:551364857603:task-definition/Task-def:1",
     "containerDefinitions": [
         {
             "name": "my-container",
-            "image": "551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action",
+            "image": "551364857603.dkr.ecr.us-west-1.amazonaws.com/github-action:latest",
             "cpu": 0,
+            "memory": 3072,
             "portMappings": [
                 {
                     "name": "my-container-80-tcp",
@@ -23,7 +24,7 @@
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "/ecs/Github-Task-def",
+                    "awslogs-group": "/ecs/Task-def",
                     "mode": "non-blocking",
                     "awslogs-create-group": "true",
                     "max-buffer-size": "25m",
@@ -35,7 +36,8 @@
             "systemControls": []
         }
     ],
-    "family": "Github-Task-def",
+    "family": "Task-def",
+    "taskRoleArn": "arn:aws:iam::551364857603:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::551364857603:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
     "revision": 1,
@@ -56,6 +58,9 @@
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.28"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
@@ -84,7 +89,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-08-31T20:03:56.222Z",
+    "registeredAt": "2024-08-31T20:45:16.168Z",
     "registeredBy": "arn:aws:iam::551364857603:user/hariom",
     "tags": []
 }
