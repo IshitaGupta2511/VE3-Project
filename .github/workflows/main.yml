@@ -35,16 +35,15 @@ jobs:
       - name: Push Docker image to ECR
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}  # Example: 123456789012.dkr.ecr.us-west-2.amazonaws.com
-          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}  # Example: my-app-repo
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPO_URL }}  # Example: my-app-repo
         run: |
           # Log in to Amazon ECR
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v1n2o2v1
 
           # Tag the Docker image
-          docker tag my-app-image:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker tag my-app-image:latest $ECR_REPOSITORY:latest
 
           # Push the Docker image to ECR
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest    
+          docker push  $ECR_REPOSITORY:latest    
