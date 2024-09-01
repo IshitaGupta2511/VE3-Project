@@ -35,8 +35,6 @@ SETUP INSTRUCTION
 5- Set Up ECS Cluster :   Create an ECS cluster and configure the pipeline to deploy to it.
 
 
-
-
 CI/CD PIPELINE WORKFLOW FOR DEPLOYMENT AND ROLLBACK ON ECS : 
 
 
@@ -47,18 +45,23 @@ The CI/CD pipeline is defined in the .github/workflows/main.yml file and include
 1- Checkout Code:   The pipeline begins by checking out the code from the GitHub repository using the actions/checkout action.
 
 2- Build Docker Image:   A multi-stage Docker build is performed to create an optimized image. Nginx is set up as a reverse proxy to serve the application.
-       "In code you can check Dockerfile"
+
+  In code you can check Dockerfile          
 
 3- Push Image to ECR:    The built Docker image is tagged and pushed to an AWS ECR (Elastic Container Registry) repository.
 
+
 4- Deploy on ECS:   The pipeline updates the ECS task definition with the new Docker image and deploys it to an ECS cluster.
-       "To deploy application create Cluster , Task-definition & Service "
-       and to create TASK-DEFINITION we create a file named  **.json
+
+   "To deploy application create Cluster , Task-definition & Service "
+   
+   and to create TASK-DEFINITION we create a file named  **.json
 
 5- Integration Tests:    pipeline performs integration tests by making a curl request to the application URL. If the application does not respond successfully, the pipeline triggers a rollback.
 
 6- The rollback step is conditionally executed if the integration tests fail. This will only run if the previous step fails 
-        Rollback:    In case of test failure, the ECS service is rolled back to the previous stable version to ensure continuous availability.
+
+   Rollback:    In case of test failure, the ECS service is rolled back to the previous stable version to ensure continuous availability.
 
 
 To MONITOR EXECUTION
