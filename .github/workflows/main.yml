@@ -69,7 +69,7 @@ jobs:
           cluster: Github-Cluster-1
           wait-for-service-stability: true
 
-     # Integrate Testing
+     # Integrate Testing Stage
       - name: Integration Tests
         run: |
          curl -f http://50.18.247.157 || exit 1 
