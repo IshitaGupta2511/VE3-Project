@@ -20,6 +20,9 @@ Before running this pipeline, ensure you have the following:
 5- Nginx :   Nginx configured as a reverse proxy in the Dockerfile.
 
 
+
+
+
 SETUP INSTRUCTION
 
 
@@ -32,6 +35,7 @@ SETUP INSTRUCTION
 4- Create ECR Repository :   Manually create an ECR repository in AWS or allow the pipeline to push to an existing one.
 
 5- Set Up ECS Cluster :   Create an ECS cluster and configure the pipeline to deploy to it.
+
 
 
 
