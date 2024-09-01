@@ -70,9 +70,9 @@ jobs:
           wait-for-service-stability: true
 
      # Integrate Testing
-     # - name: Integration Tests
-      #  run: |
-       #   curl -f http://my-service-url/health || exit 1 
+      - name: Integration Tests
+        run: |
+         curl -f http://50.18.247.157 || exit 1 
 
 
       # Rollback in case of failure
