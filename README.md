@@ -21,8 +21,6 @@ Before running this pipeline, ensure you have the following:
 
 
 
-
-
 SETUP INSTRUCTION
 
 
