@@ -1,6 +1,6 @@
 CI/CD PIPELINE WITH GITHUB ACTIONS FOR AUTOMATED DEPLOYMENT AND ROLLBACK
 
-
+just checking
 OVERVIEW
 
 This repository contains a web application with a fully automated CI/CD pipeline configured using GitHub Actions. The pipeline is designed to build, deploy, test, and roll back the application seamlessly. The deployment target is AWS Elastic Container Service (ECS), and the Docker image is stored in Amazon Elastic Container Registry (ECR).
