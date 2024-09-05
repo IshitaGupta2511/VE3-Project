@@ -65,8 +65,8 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ecs-task-def.json
-          service: Github-service
-          cluster: Github-Cluster-1
+          service: ishi-svc
+          cluster: My-cluster
           wait-for-service-stability: true
 
      # Integrate Testing Stage
